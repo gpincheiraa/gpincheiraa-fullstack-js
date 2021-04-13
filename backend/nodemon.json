@@ -1,0 +1,7 @@
+{
+  "env": {
+    "NODE_ENV": "development",
+    "PORT": 3000,
+    "GOOGLE_APPLICATION_CREDENTIALS": "./firebase-service-account.json"
+  }
+}
