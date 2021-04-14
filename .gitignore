@@ -1,11 +1,12 @@
 .DS_Store
 node_modules
-/dist
-firebase-service-account.json
+dist
 
 /tests/e2e/videos/
 /tests/e2e/screenshots/
 
+firebase-service-account.json
+local.database.sqlite3
 
 # local env files
 .env.local
