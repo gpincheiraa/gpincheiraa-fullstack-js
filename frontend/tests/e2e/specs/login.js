@@ -9,5 +9,5 @@ describe('login test suite', () => {
     cy.login('test-e2e@boolean.cl', 'booleanacademia')
 
     cy.location('pathname').should('equal', '/productos')
-   })
-});
+  })
+})

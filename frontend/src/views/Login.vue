@@ -4,9 +4,6 @@
       <v-card-title class="pb-0">
         <h1 class="mx-auto mb-5">Ingreso</h1>
       </v-card-title>
-      <v-alert v-if="isFormRejected" type="error">
-        <p>Usuario o contraseña inválidos. Ingresa los datos correctos.</p>
-      </v-alert>
       <v-form ref="form">
         <v-text-field
           v-model="email"
@@ -39,18 +36,16 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { Auth } from '@/firebase'
 
 export default {
   data () {
     return {
-      isFormValid: false,
-      isFormRejected: false,
-      formStatusMessage: '',
       email: '',
       emailRules: [
         (v) => !!v || 'El correo es requerido',
-        (v) => /.+@.+\..+/.test(v) || 'El correo debe ser válido must be valid'
+        (v) => /.+@.+\..+/.test(v) || 'El correo debe tener formato válido'
       ],
       password: '',
       passwordRules: [(v) => !!v || 'La contraseña es requerida'],
@@ -58,18 +53,18 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['setAlert']),
     validate () {
       return this.$refs.form.validate()
     },
-    login () {
+    async login () {
       if (this.validate()) {
-        Auth.signInWithEmailAndPassword(this.email, this.password)
-          .then(() => {
-            this.$router.push({ name: 'Products' })
-          })
-          .catch(() => {
-            this.isFormRejected = true
-          })
+        try {
+          await Auth.signInWithEmailAndPassword(this.email, this.password)
+          this.$router.push({ name: 'Products' })
+        } catch (error) {
+          this.setAlert({ message: 'Error al hacer autenticación', type: 'error' })
+        }
       }
     }
   }
