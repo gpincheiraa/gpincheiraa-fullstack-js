@@ -7,7 +7,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: node:14.15.0-alpine3.12
+      image: node:12
     steps:
         - name: Checkout code
           uses: actions/checkout@v2
@@ -17,28 +17,35 @@ jobs:
             npm install
             npm run build
             cd ..
-            mkdir -p public
-            cp -R ./frontend/dist/. public
-            ls -R -lha public
+            mkdir -p backend/public
+            cp -R ./frontend/dist/. backend/public
+            ls -R -lha backend/public
         - name: Archive production artifacts
           uses: actions/upload-artifact@v2
           with:
             name: frontend-public-artifact
-            path: public/  
+            path: |
+              backend
+              !backend/tests
+              !backend/.eslintrc.js
+              !backend/jest-config.js
+              !backend/nodemon.json
   deploy:
     runs-on: ubuntu-latest
+    container:
+      image: node:12
     needs: build
     env:
       HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
       HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
     steps:
-        - name: Checkout code
-          uses: actions/checkout@v2
         - name: Download a single artifact
           uses: actions/download-artifact@v2
           with:
             name: frontend-public-artifact
-            path: backend/src/public
         - name: Run deploy script
           run: |
+            cd backend
+            npm install
+            ls -la
             npm run heroku access -- --app=$HEROKU_APP_NAME
