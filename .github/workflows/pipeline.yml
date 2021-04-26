@@ -48,6 +48,7 @@ jobs:
           run: |
             npm i -g heroku
             cd backend
+            git init
             npm install
             ls -la
             heroku access --app=$HEROKU_APP_NAME
