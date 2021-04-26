@@ -50,7 +50,7 @@ jobs:
             cd backend
             npm install
             ls -la
-            heroku access -- --app=$HEROKU_APP_NAME
+            heroku access --app=$HEROKU_APP_NAME
             git add .
             git commit -m "deploy($HEROKU_APP_NAME): deploy from github actions"
             git log -1
