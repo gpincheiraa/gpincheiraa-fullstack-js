@@ -28,7 +28,7 @@ jobs:
               backend
               !backend/tests
               !backend/.eslintrc.js
-              !backend/jest-config.js
+              !backend/jest.config.js
               !backend/nodemon.json
   deploy:
     runs-on: ubuntu-latest
@@ -49,7 +49,9 @@ jobs:
             cd backend
             npm install
             ls -la
-            npm run heroku access -- --app=$HEROKU_APP_NAME
+            heroku access -- --app=$HEROKU_APP_NAME
             git add .
-            git commit -m"deploy($HEROKU_APP_NAME): deploy from github actions"
+            git commit -m "deploy($HEROKU_APP_NAME): deploy from github actions"
+            git log -1
             git push heroku main
+            
