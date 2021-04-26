@@ -6,5 +6,6 @@ const app = express()
 
 app.use('/api', authMiddleware)
 app.use('/api', routes)
+app.use(express.static(`${__dirname}/public`))
 
 module.exports = app
