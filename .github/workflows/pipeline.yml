@@ -41,5 +41,4 @@ jobs:
             path: backend/src/public
         - name: Run deploy script
           run: |
-            npm run heroku login
             npm run heroku access -- --app=$HEROKU_APP_NAME
