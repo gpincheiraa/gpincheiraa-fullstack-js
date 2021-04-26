@@ -46,6 +46,7 @@ jobs:
             path: backend
         - name: Run deploy script
           run: |
+            npm i -g heroku
             cd backend
             npm install
             ls -la
@@ -54,4 +55,3 @@ jobs:
             git commit -m "deploy($HEROKU_APP_NAME): deploy from github actions"
             git log -1
             git push heroku main
-            
