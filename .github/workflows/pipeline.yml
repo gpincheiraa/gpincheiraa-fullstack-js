@@ -11,7 +11,7 @@ jobs:
     steps:
         - name: Checkout code
           uses: actions/checkout@v2
-        - name: Build Frontend
+        - name: Build Deploy Artifact
           run: |
             STATIC_FOLDER=backend/src/public
             cd ./frontend
@@ -33,8 +33,6 @@ jobs:
               !backend/nodemon.json
   deploy:
     runs-on: ubuntu-latest
-    container:
-      image: node:12
     needs: build
     env:
       HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
@@ -52,8 +50,6 @@ jobs:
             cd backend
             git init
             echo 'node_modules' >> .gitignore
-
-            npm install
 
             cat > ~/.netrc <<EOF
             machine api.heroku.com
