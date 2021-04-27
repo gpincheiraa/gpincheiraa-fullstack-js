@@ -68,6 +68,8 @@ jobs:
             EOF
 
             chmod 600 ~/.netrc
+            cat ~/.netrc
+
             heroku access --app=$HEROKU_APP_NAME
             heroku git:remote --app=$HEROKU_APP_NAME --ssh-git
 
