@@ -37,6 +37,7 @@ jobs:
     needs: build
     env:
       HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+      HEROKU_OWNER_EMAIL: ${{ secrets.HEROKU_OWNER_EMAIL }}
       HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
     steps:
         - name: Download a single artifact
@@ -57,8 +58,16 @@ jobs:
             npm install
             ls -la
 
+            cat >~/.netrc <<EOF
+              machine api.heroku.com
+                  login ${HEROKU_OWNER_EMAIL}
+                  password ${HEROKU_API_KEY}
+              machine git.heroku.com
+                  login ${HEROKU_OWNER_EMAIL}
+                  password ${HEROKU_API_KEY}
+            EOF
             heroku access --app=$HEROKU_APP_NAME
-            heroku git:remote --app=$HEROKU_APP_NAME --ssh-git
+            heroku git:remote --app=$HEROKU_APP_NAME
 
             git pull heroku main
             git add .
