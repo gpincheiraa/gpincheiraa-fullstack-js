@@ -78,7 +78,7 @@ jobs:
             git add .
             git commit -m "deploy: server artifact deployment from github actions"
             git log -1
-            git push -f heroku
+            git push -f heroku master
 
 
             
