@@ -53,13 +53,12 @@ jobs:
             echo 'node_modules' >> .gitignore
             git config user.email deployment-user@github-actions
             git config user.name "Deployment Bot"
-            
 
             npm install
             ls -la
 
             heroku access --app=$HEROKU_APP_NAME
-            heroku git:remote --app=$HEROKU_APP_NAME
+            heroku git:remote --app=$HEROKU_APP_NAME --ssh-git
 
             git pull heroku main
             git add .
