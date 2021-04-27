@@ -58,14 +58,16 @@ jobs:
             npm install
             ls -la
 
-            cat >~/.netrc <<EOF
+            cat > ~/.netrc <<EOF
               machine api.heroku.com
-                  login ${HEROKU_OWNER_EMAIL}
-                  password ${HEROKU_API_KEY}
+                login $HEROKU_OWNER_EMAIL
+                password $HEROKU_API_KEY
               machine git.heroku.com
-                  login ${HEROKU_OWNER_EMAIL}
-                  password ${HEROKU_API_KEY}
+                login $HEROKU_OWNER_EMAIL
+                password $HEROKU_API_KEY
             EOF
+
+            chmod 600 ~/.netrc
             heroku access --app=$HEROKU_APP_NAME
             heroku git:remote --app=$HEROKU_APP_NAME
 
