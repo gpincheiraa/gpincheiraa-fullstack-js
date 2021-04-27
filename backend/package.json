@@ -2,15 +2,19 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "engines": {
+    "node": "12.x"
+  },
   "scripts": {
-    "start": "nodemon src/server.js",
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "db:migrate": "npm run sequelize db:migrate",
     "test": "jest --runInBand --coverage",
     "eslint": "eslint",
     "lint": " eslint .",
     "jest": "jest",
     "sequelize": "sequelize",
-    "heroku-postbuild": "npm run sequelize db:migrate -- --env=production"
+    "heroku-postbuild": "npm run db:migrate -- --env=production"
   },
   "keywords": [],
   "author": "",
@@ -30,8 +34,5 @@
     "sequelize-cli": "^6.2.0",
     "sqlite3": "^5.0.2",
     "supertest": "^6.1.3"
-  },
-  "engines": {
-    "node": "12.x"
   }
 }

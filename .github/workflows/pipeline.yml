@@ -47,8 +47,6 @@ jobs:
             path: backend
         - name: Run deploy script
           run: |
-            npm i -g heroku
-
             cd backend
             git init
             echo 'node_modules' >> .gitignore
@@ -70,13 +68,7 @@ jobs:
 
             git config user.email deployment-user@github-actions
             git config user.name "Deployment Bot"
-
-            heroku git:remote --app=$HEROKU_APP_NAME
-
+            git remote add heroku https://git.heroku.com/$HEROKU_APP_NAME.git
             git add .
             git commit -m "deploy: server artifact deployment from github actions"
-            git log -1
             git push -f heroku master
-
-
-            
