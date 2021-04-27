@@ -58,13 +58,13 @@ jobs:
             chmod 600 ~/.netrc
             cat ~/.netrc
 
-            git config user.email deployment-user@github-actions
-            git config user.name "Deployment Bot"
-
         - name: Deploy Backend to Production
           run: |
             cd backend
             git init
+            git config user.email deployment-user@github-actions
+            git config user.name "Deployment Bot"
+
             git remote add heroku https://git.heroku.com/$HEROKU_APP_NAME.git
             echo 'node_modules' >> .gitignore
 
