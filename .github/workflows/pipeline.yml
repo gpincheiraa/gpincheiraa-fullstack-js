@@ -53,7 +53,7 @@ jobs:
             echo 'node_modules' >> .gitignore
             git config user.email deployment-user@github-actions
             git config user.name "Deployment Bot"
-            git pull origin main
+            
 
             npm install
             ls -la
@@ -61,6 +61,7 @@ jobs:
             heroku access --app=$HEROKU_APP_NAME
             heroku git:remote --app=$HEROKU_APP_NAME
 
+            git pull origin main
             git add .
             git commit -m "deploy: server artifact deployment from github actions"
             git log -1
