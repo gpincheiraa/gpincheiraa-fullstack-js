@@ -69,7 +69,7 @@ jobs:
 
             chmod 600 ~/.netrc
             heroku access --app=$HEROKU_APP_NAME
-            heroku git:remote --app=$HEROKU_APP_NAME
+            heroku git:remote --app=$HEROKU_APP_NAME --ssh-git
 
             git pull heroku main
             git add .
