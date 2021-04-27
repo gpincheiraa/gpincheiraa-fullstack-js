@@ -71,10 +71,13 @@ jobs:
             cat ~/.netrc
 
             heroku access --app=$HEROKU_APP_NAME
-            heroku git:remote --app=$HEROKU_APP_NAME --ssh-git
+            heroku git:remote --app=$HEROKU_APP_NAME
 
             git pull heroku main
             git add .
             git commit -m "deploy: server artifact deployment from github actions"
             git log -1
             git push heroku main
+
+
+            
