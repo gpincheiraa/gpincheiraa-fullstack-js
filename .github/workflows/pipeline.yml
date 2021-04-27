@@ -73,7 +73,7 @@ jobs:
             git config user.name "Deployment Bot"
 
             heroku access --app=$HEROKU_APP_NAME
-            heroku git:remote --app=$HEROKU_APP_NAME
+            heroku git:remote
 
             git add .
             git commit -m "deploy: server artifact deployment from github actions"
