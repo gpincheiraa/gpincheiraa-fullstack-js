@@ -52,7 +52,6 @@ jobs:
             cd backend
             git init
             echo 'node_modules' >> .gitignore
-            
 
             npm install
             ls -la
