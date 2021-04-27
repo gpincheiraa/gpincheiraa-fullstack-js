@@ -52,8 +52,7 @@ jobs:
             cd backend
             git init
             echo 'node_modules' >> .gitignore
-            git config user.email deployment-user@github-actions
-            git config user.name "Deployment Bot"
+            
 
             npm install
             ls -la
@@ -70,14 +69,16 @@ jobs:
             chmod 600 ~/.netrc
             cat ~/.netrc
 
+            git config user.email deployment-user@github-actions
+            git config user.name "Deployment Bot"
+
             heroku access --app=$HEROKU_APP_NAME
             heroku git:remote --app=$HEROKU_APP_NAME
 
-            git pull heroku main
             git add .
             git commit -m "deploy: server artifact deployment from github actions"
             git log -1
-            git push heroku main
+            git push -f heroku
 
 
             
