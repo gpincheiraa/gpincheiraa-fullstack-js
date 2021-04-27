@@ -59,12 +59,12 @@ jobs:
             ls -la
 
             cat > ~/.netrc <<EOF
-              machine api.heroku.com
-                login $HEROKU_OWNER_EMAIL
-                password $HEROKU_API_KEY
-              machine git.heroku.com
-                login $HEROKU_OWNER_EMAIL
-                password $HEROKU_API_KEY
+            machine api.heroku.com
+              login $HEROKU_OWNER_EMAIL
+              password $HEROKU_API_KEY
+            machine git.heroku.com
+              login $HEROKU_OWNER_EMAIL
+              password $HEROKU_API_KEY
             EOF
 
             chmod 600 ~/.netrc
