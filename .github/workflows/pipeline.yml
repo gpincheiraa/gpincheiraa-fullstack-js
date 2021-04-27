@@ -61,7 +61,7 @@ jobs:
             heroku access --app=$HEROKU_APP_NAME
             heroku git:remote --app=$HEROKU_APP_NAME
 
-            git pull origin main
+            git pull heroku main
             git add .
             git commit -m "deploy: server artifact deployment from github actions"
             git log -1
