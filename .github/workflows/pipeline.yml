@@ -51,17 +51,6 @@ jobs:
             git init
             echo 'node_modules' >> .gitignore
 
-            cat > ~/.netrc <<EOF
-            machine api.heroku.com
-              login $HEROKU_OWNER_EMAIL
-              password $HEROKU_API_KEY
-            machine git.heroku.com
-              login $HEROKU_OWNER_EMAIL
-              password $HEROKU_API_KEY
-            EOF
-            chmod 600 ~/.netrc
-            cat ~/.netrc
-
             git config user.email deployment-user@github-actions
             git config user.name "Deployment Bot"
             git remote add heroku https://git.heroku.com/$HEROKU_APP_NAME.git
